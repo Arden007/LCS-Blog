@@ -11,7 +11,7 @@ router.post("/register", userController.addUser);
 router.post("/login", userController.login);
 
 // GET
-router.get("/admin", auth, userController.getUsersAdmin);
+router.get("/admin", userController.getUsersAdmin);
 
 // UPDATE
 router.put("/update", auth, userController.updateUser);

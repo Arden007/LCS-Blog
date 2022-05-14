@@ -132,28 +132,12 @@ const getUsersAuth = async (req, res) => {
 // Gets all user data even private fields
 const getUsersAdmin = async (req, res) => {
   try {
-    const user = await knex
-      .select()
-      .from("user")
-      .where("id", req.user.id)
-      .then((user) => {
-        console.log(user[0]);
-        return user[0];
-      });
-
-      console.log(user.isAdmin);
-    if (user.isAdmin === true) {
-      // Checks if user is an admin (Needs to be admin)
       await knex
         .select()
         .from("user")
         .then((user) => {
           res.send(user);
         });
-    } else {
-      res.status(401);
-      return res.send("Access Rejected, Not Authorized");
-    }
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
