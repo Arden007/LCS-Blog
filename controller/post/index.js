@@ -31,7 +31,7 @@ const getPostAuth = async (req, res) => {
   try {
     await knex
       .from("post")
-      .select("name", "category", "img", "likecounter", "dislikecounter")
+      .select()
       .then((posts) => {
         res.send(posts);
       });
