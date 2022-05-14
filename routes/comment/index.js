@@ -6,7 +6,7 @@ const commentController = require("../../controller/comment");
 
 // GET all
 
-router.get("/admin", auth, commentController.getCommentAdmin);
+router.get("/admin", commentController.getCommentAdmin);
 
 // CREATE
 router.post("/create/:id", auth, commentController.addComment);
