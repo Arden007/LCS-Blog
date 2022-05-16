@@ -132,12 +132,23 @@ const getUsersAuth = async (req, res) => {
 // Gets all user data even private fields
 const getUsersAdmin = async (req, res) => {
   try {
+    const usera = await knex
+      .select()
+      .from("user")
+      .where("id", req.user.id)
+      .then((user) => {
+        console.log(user[0]);
+        return user[0];
+      });
+
+    if (usera.isAdmin === true) {
       await knex
         .select()
         .from("user")
         .then((user) => {
           res.send(user);
         });
+    }
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -149,7 +160,7 @@ const getUserData = async (req, res) => {
   try {
     const user = await knex
       .from("user")
-      .select("id", "name", "email", "password", "Img", "isAdmin") // Returns only theses fields
+      .select("id", "name", "email", "password", "img", "isAdmin") // Returns only theses fields
       .where("id", req.user.id)
       .then((user) => {
         return user[0];

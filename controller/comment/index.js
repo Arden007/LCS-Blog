@@ -28,13 +28,24 @@ const addComment = async (req, res) => {
 // Gets all user data even private fields
 const getCommentAdmin = async (req, res) => {
   try {
-    await knex
-      .select()
-      .from("comment")
-      .then((comment) => {
-        console.log(comment);
-        res.send(comment);
-      });
+     const usera = await knex
+       .select()
+       .from("user")
+       .where("id", req.user.id)
+       .then((user) => {
+         console.log(user[0]);
+         return user[0];
+       });
+
+     if (usera.isAdmin === true){
+       await knex
+         .select()
+         .from("comment")
+         .then((comment) => {
+           console.log(comment);
+           res.send(comment);
+         });
+        }
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

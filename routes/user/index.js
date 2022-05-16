@@ -10,13 +10,16 @@ router.post("/register", userController.addUser);
 // LOGIN
 router.post("/login", userController.login);
 
-// GET
-router.get("/admin", userController.getUsersAdmin);
+// GET ALL
+router.get("/admin", auth, userController.getUsersAdmin);
 
 // UPDATE
 router.put("/update", auth, userController.updateUser);
 
 // DELETE
 router.delete("/delete", auth, userController.removeUser);
+
+// GET by id
+router.get("//",auth, userController.getUserData);
 
 module.exports = router;
