@@ -20,6 +20,6 @@ router.put("/update", auth, userController.updateUser);
 router.delete("/delete", auth, userController.removeUser);
 
 // GET by id
-router.get("//",auth, userController.getUserData);
+router.get("//", auth, userController.getUserData);
 
 module.exports = router;
